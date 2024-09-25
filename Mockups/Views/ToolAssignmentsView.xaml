@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mockups.Views"
         ShowInTaskbar="False" WindowStyle="ToolWindow"
-        ResizeMode="NoResize"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance local:ToolAssignmentsView}" Height="450" Width="600"
         Title="Tool Assignment...">
     <Grid>

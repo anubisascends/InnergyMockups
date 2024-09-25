@@ -12,5 +12,7 @@ namespace Mockups.Models
         private MachineType _Type;
         [ObservableProperty]
         private bool _IsChecked;
+        
+        public ToolType CanUseTools { get; set; }
     }
 }

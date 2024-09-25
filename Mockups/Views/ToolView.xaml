@@ -1,0 +1,25 @@
+﻿<Window x:Class="Mockups.Views.ToolView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mockups.Views"
+        mc:Ignorable="d" WindowStyle="ToolWindow"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" d:DataContext="{d:DesignInstance local:ToolView}"
+        Title="ToolView" Height="450" Width="800">
+    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ViewModel.ToolsView}">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Name}"/>
+            <DataGridTextColumn Binding="{Binding Type}" IsReadOnly="True"/>
+            <DataGridCheckBoxColumn Binding="{Binding IsAvailable}"/>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ToolView}}, Path=ViewModel.AssignMachinesCommand}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</Window>
