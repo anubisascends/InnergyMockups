@@ -15,12 +15,12 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="24">
+        <TextBlock FontSize="24" Margin="5">
             <Run Text="{Binding ViewModel.SelectedTool.Name}"/>
             <Run>[</Run><Run Text="{Binding ViewModel.SelectedTool.Type}"/><Run>]</Run>
         </TextBlock>
 
-        <ItemsControl ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1">
+        <ItemsControl ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1" Margin="5">
             <ItemsControl.RenderTransform>
                 <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
             </ItemsControl.RenderTransform>
@@ -37,7 +37,7 @@
         </ItemsControl>
 
         <Grid Grid.Row="2" Background="Silver">
-            <TextBlock Margin="0,0,170,0" TextWrapping="Wrap">
+            <TextBlock Margin="0,0,170,0" TextWrapping="Wrap" FontSize="18">
                 <Run>Selected Machines:</Run>
                 <Run Text="{Binding ViewModel.SelectedItems}"/>
             </TextBlock>
