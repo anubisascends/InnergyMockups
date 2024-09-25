@@ -19,10 +19,19 @@ namespace Mockups.ViewModels
             if(view.ShowDialog() ?? false)
             {
                 var selectedMachines = view.ViewModel.Machines.Where(x => x.IsChecked).ToList();
+                
+                var result = "Any";
 
-                var result = string.Join(",\r\n", selectedMachines.Select(x => $"{x.Name} [Id={x.Id}]"));
+                if (selectedMachines.Count > 0)
+                {
+                    result = string.Join(",\r\n", selectedMachines.Select(x => $"{x.Name} [Id={x.Id}]"));
+                }
 
-                MessageBox.Show($"You selected the following machines:\r\n\r\n{result}\r\n\r\nThese should now be assigned to the selected tool: {view.ViewModel.SelectedTool.Name}");
+                MessageBox.Show($"You selected the following machines:" +
+                    $"\r\n\r\n" +
+                    $"{result}" +
+                    $"\r\n\r\n" +
+                    $"These should now be assigned to the selected tool: {view.ViewModel.SelectedTool.Name}. If 'Any' was selected, then tool assignments for this tool should be removed.");
             }
         }
     }
