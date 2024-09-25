@@ -3,23 +3,91 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Mockups.Views"
+        xmlns:local="clr-namespace:Mockups.Views" xmlns:components="clr-namespace:Mockups.Components"
         mc:Ignorable="d" WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" d:DataContext="{d:DesignInstance local:ToolView}"
-        Title="ToolView" Height="450" Width="800">
-    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding ViewModel.ToolsView}">
-        <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding Name}"/>
-            <DataGridTextColumn Binding="{Binding Type}" IsReadOnly="True"/>
-            <DataGridCheckBoxColumn Binding="{Binding IsAvailable}"/>
-            <DataGridTemplateColumn>
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ToolView}}, Path=ViewModel.AssignMachinesCommand}"/>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
-    </DataGrid>
+        d:DataContext="{d:DesignInstance local:ToolView}"
+        Title="ToolView" Height="450" Width="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        
+        <components:MyDataGrid AutoGenerateColumns="False" ItemsSource="{Binding ViewModel.ToolsView}"
+                  SelectionMode="Extended" BindableSelectedItems="{Binding ViewModel.SelectedTools, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ToolNumber}" Header="No." Width="45"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsDownShear}" Header="↓" Width="35"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsUpShear}" Header="↑" Width="35"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsOutline}" Header="&#x25CC;" Width="35"/>
+                <DataGridTextColumn Binding="{Binding Diameter}" Header="Diameter" Width="75"/>
+                <DataGridTextColumn Binding="{Binding Length}" Header="Length" Width="75"/>
+                <DataGridTextColumn Binding="{Binding WorkingDepth}" Header="Max Depth" Width="75"/>
+                <DataGridTextColumn Binding="{Binding SpindleSpeed}" Header="Spindle Speed" Width="75"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsOutline}" Header="Climb" Width="55"/>
+                <DataGridTemplateColumn Header="Machines" Width="66"/>
+            </DataGrid.Columns>
+        </components:MyDataGrid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="Black" BorderThickness="2">
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="45"/>
+                    </TextBlock.LayoutTransform>
+                    Normal properties....didn't want to make them so ignore this block
+                </TextBlock>
+            </Border>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Label>Assign To...</Label>
+                <ListBox ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Name}"/>
+                                <Run>[</Run><Run Text="{Binding Type}"/><Run>]</Run>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Grid.Row="2" Margin="2.5">Assign</Button>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Label>Remove From...</Label>
+                <ListBox ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                    <Run Text="{Binding Name}"/>
+                    <Run>[</Run><Run Text="{Binding Type}"/><Run>]</Run>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Grid.Row="2" Margin="2.5">Unassign</Button>
+            </Grid>
+        </Grid>
+    </Grid>
 </Window>
