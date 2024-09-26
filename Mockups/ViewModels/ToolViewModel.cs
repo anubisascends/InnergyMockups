@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Mockups.Models;
 using Mockups.ViewModels.Interfaces;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Mockups.ViewModels
 {
@@ -47,6 +49,48 @@ namespace Mockups.ViewModels
 
         [ObservableProperty]
         private object _SelectedTools;
+        [ObservableProperty]
+        private Machine _SelectedAssignMachine;
+        [ObservableProperty]
+        private Machine _SelectedUnassignMachine;
+
+        [RelayCommand]
+        private void OnAssignTool()
+        {
+            if(SelectedTools is not null)
+            {
+                var tools = SelectedTools as IList;
+
+                foreach (Tool tool in tools)
+                {
+                    if (!tool.MachineAssignments.Contains(SelectedAssignMachine.Id))
+                    {
+                        var assignments = new List<int>(tool.MachineAssignments);
+                        assignments.Add(SelectedAssignMachine.Id);
+                        tool.MachineAssignments = assignments.ToArray();
+                    }
+                }
+            }
+        }
+
+        [RelayCommand]
+        private void OnUnassignTool()
+        {
+            if (SelectedTools is not null)
+            {
+                var tools = SelectedTools as IList;
+
+                foreach (Tool tool in tools)
+                {
+                    if (tool.MachineAssignments.Contains(SelectedAssignMachine.Id))
+                    {
+                        var assignments = new List<int>(tool.MachineAssignments);
+                        assignments.Remove(SelectedAssignMachine.Id);
+                        tool.MachineAssignments = assignments.ToArray();
+                    }
+                }
+            }
+        }
 
         partial void OnSelectedToolsChanged(object value)
         {

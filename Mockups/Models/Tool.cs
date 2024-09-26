@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Mockups.Models
 {
@@ -29,7 +30,7 @@ namespace Mockups.Models
         [ObservableProperty]
         private string _ToolNumber;
         [ObservableProperty]
-        private int[] _MachineAssignments;
+        private int[] _MachineAssignments = [];
 
         public static IEnumerable<Tool> DefaultTools { get; } = [
             new Tool{

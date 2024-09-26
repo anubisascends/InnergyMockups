@@ -17,18 +17,22 @@ namespace Mockups.Models
 
         public static IEnumerable<Machine> DefaultMachines { get; } = [
             new Machine{ 
+                Id = 0,
                 Name = "Nesting Machine", 
                 Type = MachineType.Router | MachineType.Sheet, 
                 CanUseTools = ToolType.Router | ToolType.Flat | ToolType.BallEnd | ToolType.Drill | ToolType.Vertical },
             new Machine{
+                Id = 1,
                 Name = "Nesting Machine 2",
                 Type = MachineType.Router | MachineType.Sheet,
                 CanUseTools = ToolType.Router | ToolType.Flat | ToolType.BallEnd | ToolType.Drill | ToolType.Vertical },
             new Machine{
+                Id = 2,
                 Name = "Panel Saw",
                 Type = MachineType.Saw | MachineType.Sheet,
                 CanUseTools = ToolType.Saw },
             new Machine{
+                Id = 3,
                 Name = "P2P Machine",
                 Type = MachineType.Router | MachineType.Part,
                 CanUseTools = ToolType.Router | ToolType.Flat | ToolType.BallEnd | ToolType.Drill | ToolType.Vertical | ToolType.Horizontal | ToolType.Saw},

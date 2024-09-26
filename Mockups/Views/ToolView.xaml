@@ -8,6 +8,9 @@
         WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance local:ToolView}"
         Title="ToolView" Height="450" Width="900">
+    <Window.Resources>
+        <components:MachineAssignmentsConverter x:Key="machineConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -27,7 +30,7 @@
                 <DataGridTextColumn Binding="{Binding WorkingDepth}" Header="Max Depth" Width="75"/>
                 <DataGridTextColumn Binding="{Binding SpindleSpeed}" Header="Spindle Speed" Width="75"/>
                 <DataGridCheckBoxColumn Binding="{Binding IsOutline}" Header="Climb" Width="55"/>
-                <DataGridTemplateColumn Header="Machines" Width="66"/>
+                <DataGridTextColumn Binding="{Binding MachineAssignments, Converter={StaticResource machineConverter}}" IsReadOnly="True" Header="Machines"/>
             </DataGrid.Columns>
         </components:MyDataGrid>
 
@@ -55,7 +58,7 @@
                 </Grid.RowDefinitions>
 
                 <Label>Assign To...</Label>
-                <ListBox ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1">
+                <ListBox ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1" SelectedItem="{Binding ViewModel.SelectedAssignMachine}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -65,7 +68,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Grid.Row="2" Margin="2.5">Assign</Button>
+                <Button Grid.Row="2" Margin="2.5" Command="{Binding ViewModel.AssignToolCommand}">Assign</Button>
             </Grid>
 
             <Grid Grid.Row="2">
@@ -76,7 +79,7 @@
                 </Grid.RowDefinitions>
 
                 <Label>Remove From...</Label>
-                <ListBox ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1">
+                <ListBox ItemsSource="{Binding ViewModel.MachinesView}" Grid.Row="1" SelectedItem="{Binding ViewModel.SelectedUnassignMachine}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -86,7 +89,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Grid.Row="2" Margin="2.5">Unassign</Button>
+                <Button Grid.Row="2" Margin="2.5" Command="{Binding ViewModel.UnassignToolCommand}">Unassign</Button>
             </Grid>
         </Grid>
     </Grid>

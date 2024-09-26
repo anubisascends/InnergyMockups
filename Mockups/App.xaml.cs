@@ -16,12 +16,10 @@ namespace Mockups
                 services.AddSingleton<RootView>();
 
                 services.AddTransient<ToolView>();
-                services.AddTransient<ToolAssignmentsView>();
 
                 services.AddSingleton<RootViewModel>();
 
                 services.AddTransient<ToolViewModel>();
-                services.AddTransient<ToolAssignmentsViewModel>();
             })
             .Build();
 
