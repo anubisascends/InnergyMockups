@@ -8,5 +8,6 @@
         Title="Available Mockups" Height="450" Width="800">
     <UniformGrid>
         <Button Command="{Binding ViewModel.ShowToolAssignmentsMockupCommand}">Tool Assignments</Button>
+        <Button Command="{Binding ViewModel.ShowOptimizerExportDialogCommand}">DESIGN Export -&gt; OPTIMIZER</Button>
     </UniformGrid>
 </Window>

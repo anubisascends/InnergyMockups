@@ -17,6 +17,10 @@
                 <Setter Property="Content" Value="Cancel" />
                 <Setter Property="IsCancel" Value="True" />
             </Style>
+
+            <Style x:Key="Buttons.Dialog.Export" TargetType="Button" BasedOn="{StaticResource Buttons.Dialog.Ok}">
+                <Setter Property="Content" Value="Export" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,34 @@
+﻿<Window x:Class="Mockups.Views.OptimizerExportDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mockups.Views" SizeToContent="Height"
+        mc:Ignorable="d" WindowStyle="ToolWindow" ShowInTaskbar="False"
+        ResizeMode="NoResize" d:DataContext="{d:DesignInstance local:OptimizerExportDialogView}"
+        Title="OIPTIMIZER" Height="375" Width="300">
+    <Grid>
+        <StackPanel>
+            <Label>Locations</Label>
+            <Button Width="65" HorizontalAlignment="Left"
+                    Command="{Binding ViewModel.ToggleAllCommand}">Toggle all</Button>
+            <ItemsControl ItemsSource="{Binding ViewModel.Locations}"
+                          MaxHeight="150">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource Buttons.Dialog.Cancel}"/>
+                <Button Style="{StaticResource Buttons.Dialog.Export}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

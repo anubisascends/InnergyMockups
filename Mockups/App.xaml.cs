@@ -13,21 +13,21 @@ namespace Mockups
     {
         internal static IHost Host { get; } = new HostBuilder()
             .ConfigureServices(services => {
-                services.AddSingleton<RootView>();
-
-                services.AddTransient<ToolView>();
+                services.AddHostedService<RootView>();
 
                 services.AddSingleton<RootViewModel>();
 
+                services.AddTransient<ToolView>();
+                services.AddTransient<OptimizerExportDialogView>();
+
                 services.AddTransient<ToolViewModel>();
+                services.AddTransient<OptimizerExportDialogViewModel>();
             })
             .Build();
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var view = Host.Services.GetRequiredService<RootView>();
-
-            view.Show();
+            Host.Start();
         }
     }
 
